@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# project configuration from .env (secret part)
 load_dotenv()  # loads variables from .env
 
 #FRED API KEY

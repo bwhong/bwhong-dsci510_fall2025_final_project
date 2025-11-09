@@ -7,7 +7,7 @@ from fredapi import Fred
 
 # --- 1. DOWNLOAD DATA FROM FRED ---
 
-def get_fred_data(dataset, observation_start, observation_end, frequency = 'm', api_key):
+def get_fred_data(dataset, observation_start_date, observation_end_date, api_key, freq= 'm'):
     """
     Downloads a specific file from FRED, extracts it,
     and loads it into a pandas DataFrame.
@@ -23,7 +23,12 @@ def get_fred_data(dataset, observation_start, observation_end, frequency = 'm', 
     try:
         print(f"Downloading {dataset}...")
         fred = Fred(api_key = api_key)
-        data = fred.get_series(dataset,  observation_start, observation_end, frequency)
+        data = fred.get_series(
+                series_id= dataset,           
+                observation_start= observation_start_date, 
+                observation_end=observation_end_date,   
+                frequency= freq                       
+                )
         data = data.reset_index()
         data.columns = ['Date', 'Value']
         return data
