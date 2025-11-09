@@ -1,42 +1,34 @@
 import os
 # os.environ["KAGGLE_CONFIG_DIR"] = "/home/alexey/"
-import kaggle
 import pandas as pd
 import requests
+import yfinance as yf
+from fredapi import Fred
 
-# --- 1. DOWNLOAD DATA FROM KAGGLE ---
+# --- 1. DOWNLOAD DATA FROM FRED ---
 
-def get_kaggle_data(dataset_slug, extract_dir='kaggle_data'):
+def get_fred_data(dataset, observation_start, observation_end, frequency = 'm', api_key):
     """
-    Downloads a specific file from a Kaggle dataset, extracts it,
+    Downloads a specific file from FRED, extracts it,
     and loads it into a pandas DataFrame.
 
-    :param dataset_slug: The slug of the dataset (e.g., 'titanic')
+    :param dataset: Dataset to extract
+    :param observation_start: Observation Start Date
+    :param observation_end: Observation End Date
+    :param api_key_file: API Key File
     :param extract_dir: Directory to extract files into
     :return: pandas DataFrame or None
     """
-    print(f"--- Loading data from Kaggle: {dataset_slug} ---")
+    print(f"--- Loading data from FRED: {dataset} ---")
     try:
-        # Ensure extraction directory exists
-        os.makedirs(extract_dir, exist_ok=True)
-
-        print(f"Downloading {dataset_slug}...")
-        kaggle.api.dataset_download_files(dataset_slug, path=extract_dir, unzip=True)
-
-        csv_file_path = [f for f in os.listdir(extract_dir) if os.path.isfile(os.path.join(extract_dir, f))][0]
-        csv_file_path = os.path.join(extract_dir, csv_file_path) # make it a full path
-        # Load the extracted CSV into a DataFrame
-        if os.path.exists(csv_file_path):
-            print(f"Loading {csv_file_path} into DataFrame...")
-            df = pd.read_csv(csv_file_path)
-            print("Kaggle data loaded successfully.")
-            return df
-        else:
-            print(f"Error: Could not find extracted file {csv_file_path}")
-            return None
-
+        print(f"Downloading {dataset}...")
+        fred = Fred(api_key = api_key)
+        data = fred.get_series(dataset,  observation_start, observation_end, frequency)
+        data = data.reset_index()
+        data.columns = ['Date', 'Value']
+        return data
     except Exception as e:
-        print(f"Error loading data from Kaggle: {e}")
+        print(f"Error loading data from FRED: {e}")
         return None
 
 
