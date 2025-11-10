@@ -2,3 +2,5 @@ data
 src/__pycache__
 .env
 results
+.DS_Store
+src/Final_Project.ipynb

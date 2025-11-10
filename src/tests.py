@@ -24,3 +24,10 @@ print()
 print('TSLA Data Loading Test')
 tesla_data = get_stock_data('TSLA', '2009-08-01', '2021-1-01', '1wk', True)
 print(tesla_data.head())
+
+print()
+
+print('SPY Data Loading Test')
+spy_data = get_stock_data('SPY', '1990-01-01', '2025-11-01', '1mo', True)
+print(spy_data.head())
+
