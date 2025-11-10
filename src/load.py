@@ -46,7 +46,7 @@ def get_stock_data(dataset, observation_start_date, observation_end_date, interv
     :param observation_start: Observation Start Date
     :param observation_end: Observation End Date
     :param interval: Frequency of Data
-    :param auto_adjust: Boolean that controls whether the price data is adjusted for stocks and dividends. By Default, I have set it to True.
+    :param auto_adjust: Boolean that controls whether the price data is adjusted for stock splits and dividends. By Default, I have set it to True.
     :return: pandas DataFrame or None
     """
     print(f"--- Loading data from yfinance: {dataset} ---")

@@ -21,7 +21,6 @@ print(nvidia_data.head())
 
 print()
 
-
 print('TSLA Data Loading Test')
 tesla_data = get_stock_data('TSLA', '2009-08-01', '2021-1-01', '1wk', True)
 print(tesla_data.head())
