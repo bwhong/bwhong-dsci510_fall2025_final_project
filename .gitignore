@@ -1,3 +1,3 @@
-bwhong-dsci510_fall2025_final_project/data
-.pycache
-fred_api_key.txt
+data
+src/__pycache__
+.env
