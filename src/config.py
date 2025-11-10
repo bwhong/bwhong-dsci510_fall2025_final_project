@@ -12,4 +12,6 @@ RESULTS_DIR = "../results"
 
 # data sources configuration
 UNRATE_DATASET= 'UNRATE'
+SPY_DATASET = 'SPY'
+NVIDIA_DATASET = 'NVDA'
 

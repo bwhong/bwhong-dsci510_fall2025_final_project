@@ -1,11 +1,9 @@
 import os
-# os.environ["KAGGLE_CONFIG_DIR"] = "/home/alexey/"
 import pandas as pd
-import requests
 import yfinance as yf
 from fredapi import Fred
 
-# --- 1. DOWNLOAD DATA FROM FRED ---
+# --- 1. Extract Data FROM FRED ---
 
 def get_fred_data(dataset, observation_start_date, observation_end_date, api_key, freq= 'm'):
     """
@@ -16,10 +14,10 @@ def get_fred_data(dataset, observation_start_date, observation_end_date, api_key
     :param observation_start: Observation Start Date
     :param observation_end: Observation End Date
     :param api_key_file: API Key File
-    :param extract_dir: Directory to extract files into
+    :param freq: Frequency of Data
     :return: pandas DataFrame or None
     """
-    print(f"--- Loading data from FRED: {dataset} ---")
+    print(f"--- Extracting data from FRED: {dataset} ---")
     try:
         print(f"Downloading {dataset}...")
         fred = Fred(api_key = api_key)
@@ -31,78 +29,40 @@ def get_fred_data(dataset, observation_start_date, observation_end_date, api_key
                 )
         data = data.reset_index()
         data.columns = ['Date', 'Value']
+        data['Date'] = pd.to_datetime(data['Date'])
         return data
     except Exception as e:
         print(f"Error loading data from FRED: {e}")
         return None
+    
+# --- 2. Exract Data from yfinance ---
 
-
-# --- 2. DOWNLOAD FILE FROM WEB ---
-
-def get_web_csv_data(url):
+def get_stock_data(dataset, observation_start_date, observation_end_date, interval, auto_adjust = True):
     """
-    Downloads a CSV file directly from a URL into a pandas DataFrame.
+    Extract a specific file from yfinance, extracts it,
+    and loads it into a pandas DataFrame.
 
-    :param url: The direct URL to the .csv file
+    :param dataset: Dataset to extract
+    :param observation_start: Observation Start Date
+    :param observation_end: Observation End Date
+    :param interval: Frequency of Data
+    :param auto_adjust: Boolean that controls whether the price data is adjusted for stocks and dividends. By Default, I have set it to True.
     :return: pandas DataFrame or None
     """
-    print(f"--- Loading data from Web URL: {url[:50]}... ---")
+    print(f"--- Loading data from yfinance: {dataset} ---")
     try:
-        # pandas can read a CSV directly from a URL
-        df = pd.read_csv(url)
-        print("Web CSV data loaded successfully.")
-        return df
+        print(f"Extracting {dataset}...")
+        data = yf.download(
+            tickers = dataset, 
+            start = observation_start_date,
+            end = observation_end_date,
+            interval = interval,
+            auto_adjust= auto_adjust                  
+            )
+        data = data.reset_index()[['Date', 'Close']]
+        data['Date'] = pd.to_datetime(data['Date'])
+        data['Close'] = data['Close'].pct_change()
+        return data
     except Exception as e:
-        print(f"Error loading data from URL: {e}")
+        print(f"Error loading data from yfinance: {e}")
         return None
-
-
-# --- 3. SCRAPE DATA FROM WEBPAGE (WIKIPEDIA) ---
-def get_wikipedia_table_data(url, table_index=0):
-    """
-    Scrapes a specific table from a Wikipedia page into a pandas DataFrame.
-
-    MODIFIED: Added a User-Agent header to prevent 403 Forbidden errors.
-
-    :param url: The URL of the Wikipedia page
-    :param table_index: The 0-based index of the table to scrape
-    :return: pandas DataFrame or None
-    """
-    print(f"--- Scraping table from Wikipedia: {url[:50]}... ---")
-
-    # --- MODIFICATION ---
-    # Set a User-Agent to mimic a real browser
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-    # --- END MODIFICATION ---
-
-    try:
-        # --- MODIFICATION ---
-        # Use requests to get the page with the headers
-        response = requests.get(url, headers=headers)
-
-        # Check if the request was successful
-        if response.status_code != 200:
-            print(f"Error: Received status code {response.status_code}. Unable to fetch page.")
-            return None
-        # --- END MODIFICATION ---
-
-        # Pass the HTML content (response.text) to pandas
-        # It returns a LIST of DataFrames (all tables on the page)
-        tables = pd.read_html(response.text, flavor='bs4')
-
-        if tables:
-            print(f"Found {len(tables)} tables. Extracting table at index {table_index}...")
-            # We select the specific table we want
-            df = tables[table_index]
-            print("Wikipedia table scraped successfully.")
-            return df
-        else:
-            print("No tables found on the page.")
-            return None
-
-    except Exception as e:
-        print(f"Error scraping Wikipedia table: {e}")
-        return None
-
