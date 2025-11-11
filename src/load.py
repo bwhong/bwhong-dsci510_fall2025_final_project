@@ -19,7 +19,7 @@ def get_fred_data(dataset, observation_start_date, observation_end_date, api_key
     """
     print(f"--- Extracting data from FRED: {dataset} ---")
     try:
-        print(f"Downloading {dataset}...")
+        print(f"Extracting {dataset}...")
         fred = Fred(api_key = api_key)
         data = fred.get_series(
                 series_id= dataset,           
