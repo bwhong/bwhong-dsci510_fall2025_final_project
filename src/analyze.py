@@ -21,9 +21,10 @@ def plot_statistics(df, dataset_name, result_dir="plots", notebook_plot=False):
     categorical_cols = df.select_dtypes(include=['object', 'category']).columns
     datetime_cols = df.select_dtypes(include=['datetime']).columns
 
+    print(datetime_cols)
     # Plot 1: Histogram (for a numerical column)
     if not numerical_cols.empty:
-        col_to_plot = numerical_cols[1]
+        col_to_plot = numerical_cols[0]
         plt.figure(figsize=(10, 6))
         df[col_to_plot].hist(bins=30, edgecolor='black')
         plt.title(f'Histogram of {col_to_plot} - {dataset_name}')
@@ -48,8 +49,8 @@ def plot_statistics(df, dataset_name, result_dir="plots", notebook_plot=False):
         plt.ylabel(col2)
         plt.grid(True)
         if not notebook_plot:
-            plt.savefig(f'{result_dir}/{dataset_name}_scatterplot.png')
-            print(f"Saved scatter plot for {col1} vs {col2}")
+            plt.savefig(f'{result_dir}/{dataset_name}_lineplot.png')
+            print(f"Saved line plot for {col1} vs {col2}")
             plt.close()
         else:
             plt.plot()

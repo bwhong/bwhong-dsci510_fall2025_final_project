@@ -1,5 +1,5 @@
-data
 src/__pycache__
+src/plots
 .env
 results
 .DS_Store
