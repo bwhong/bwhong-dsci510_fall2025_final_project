@@ -4,9 +4,9 @@ Over the past decade, AI has become one of the hottest sectors in the world. Com
 # Data sources
 | Data Source | Name/Short Description | Source/URL | Type | List of Fields | Format | Python Access? | Estimated Data Size |
 |--------------|------------------------|-------------|------|----------------|---------|----------------|---------------------|
-| 1 | NVIDIA Historical Stock Close Price Percent Change | API Call | API Call | Date, Open, High, Low, Close | API Call → CSV | Yes | 308 |
-| 2 | Row 2 Col 2 | Row 2 Col 3 | Row 2 Col 4 | Row 2 Col 5 | Row 2 Col 6 | Row 2 Col 7 | Row 2 Col 8 |
-| 3 | Row 3 Col 2 | Row 3 Col 3 | Row 3 Col 4 | Row 3 Col 5 | Row 3 Col 6 | Row 3 Col 7 | Row 3 Col 8 |
+| 1 | NVIDIA Historical Stock Close Price % Change | API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | Yes | 308 |
+| 2 | SPY Historical Stock Close Price % Change | API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | Yes | 308 |
+|3 | US Unemployment Rate | API Call | API Call | Date, Unrate | API Call to CSV | Yes | 308 |
 
 
 # Results 
