@@ -29,7 +29,7 @@ def get_fred_data(dataset, observation_start_date, observation_end_date, api_key
                 )
         return data
     except Exception as e:
-        print(f"Error loading data from FRED: {e}")
+        print(f"Error extracting data from FRED: {e}")
         return None
     
 # --- 2. Exract Data from yfinance ---
@@ -46,7 +46,7 @@ def get_stock_data(dataset, observation_start_date, observation_end_date, interv
     :param auto_adjust: Boolean that controls whether the price data is adjusted for stock splits and dividends. By Default, I have set it to True.
     :return: pandas DataFrame or None
     """
-    print(f"--- Loading data from yfinance: {dataset} ---")
+    print(f"--- Extracting data from yfinance: {dataset} ---")
     try:
         print(f"Extracting {dataset}...")
         data = yf.download(
@@ -58,5 +58,5 @@ def get_stock_data(dataset, observation_start_date, observation_end_date, interv
             )
         return data
     except Exception as e:
-        print(f"Error loading data from yfinance: {e}")
+        print(f"Error extracting data from yfinance: {e}")
         return None

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 # --- PLOT STATISTICS ---
-def plot_statistics(df, dataset_name, result_dir="plots", notebook_plot=False):
+def plot_statistics(df, dataset_name, color, result_dir="plots", notebook_plot=False):
     """
     Generates and saves basic plots for a given DataFrame.
 
@@ -26,7 +26,7 @@ def plot_statistics(df, dataset_name, result_dir="plots", notebook_plot=False):
     if not numerical_cols.empty:
         col_to_plot = numerical_cols[0]
         plt.figure(figsize=(10, 6))
-        df[col_to_plot].hist(bins=30, edgecolor='black')
+        df[col_to_plot].hist(bins=30, color = color, edgecolor='black')
         plt.title(f'Histogram of {col_to_plot} - {dataset_name}')
         plt.xlabel(col_to_plot)
         plt.ylabel('Frequency')
@@ -43,8 +43,8 @@ def plot_statistics(df, dataset_name, result_dir="plots", notebook_plot=False):
         col1 = datetime_cols[0]
         col2 = numerical_cols[0]
         plt.figure(figsize=(10, 6))
-        plt.plot(df[col1], df[col2], alpha=0.5)
-        plt.title(f'Line Plot: {col1} vs {col2} - {dataset_name}')
+        plt.plot(df[col1], df[col2], color = color, alpha=0.5)
+        plt.title(f'{col2} Over Time')
         plt.xlabel(col1)
         plt.ylabel(col2)
         plt.grid(True)

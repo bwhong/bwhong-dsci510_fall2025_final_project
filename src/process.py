@@ -9,7 +9,7 @@ def process_fred_data(data, primary_column_name):
     :param primary_column_name: Primary Column Name to replace Value
     :return: pandas DataFrame or None
     """
-    print(f"--- Processing data from {primary_column_name} Dataset")
+    print(f"--- Processing {primary_column_name} Dataset")
     try:
         print(f"Processing {primary_column_name}")
         data = data.reset_index()
@@ -30,7 +30,7 @@ def process_stock_data(data, stock_name):
     :param stock_name: Stock Name
     :return: pandas DataFrame or None
     """
-    print(f"--- Processing data from yfinance: {stock_name} ---")
+    print(f"--- Processing {stock_name} data---")
     try:
         print(f"Processing {stock_name}...")
         data = data.reset_index()[['Date', 'Close']]
