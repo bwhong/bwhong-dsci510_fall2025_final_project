@@ -27,9 +27,6 @@ def get_fred_data(dataset, observation_start_date, observation_end_date, api_key
                 observation_end=observation_end_date,   
                 frequency= freq                       
                 )
-        data = data.reset_index()
-        data.columns = ['Date', 'Value']
-        data['Date'] = pd.to_datetime(data['Date'])
         return data
     except Exception as e:
         print(f"Error loading data from FRED: {e}")
@@ -59,9 +56,6 @@ def get_stock_data(dataset, observation_start_date, observation_end_date, interv
             interval = interval,
             auto_adjust= auto_adjust                  
             )
-        data = data.reset_index()[['Date', 'Close']]
-        data['Date'] = pd.to_datetime(data['Date'])
-        data['Close'] = data['Close'].pct_change()
         return data
     except Exception as e:
         print(f"Error loading data from yfinance: {e}")
