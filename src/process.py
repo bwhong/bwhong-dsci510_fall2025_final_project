@@ -34,9 +34,11 @@ def process_stock_data(data, stock_name):
     try:
         print(f"Processing {stock_name}...")
         data = data.reset_index()[['Date', 'Close']]
-        data.columns = data.columns.get_level_values(0)
+        #remove multi-index and column index name
+        data.columns = data.columns.get_level_values(0).rename(None)
         data['Date'] = pd.to_datetime(data['Date'])
-        data['Close'] = data['Close'].pct_change() * 100
+        data['Close % Change'] = data['Close'].pct_change() * 100
+        data = data[['Date', 'Close % Change']]
         data = data.dropna()
         return data
     except Exception as e:

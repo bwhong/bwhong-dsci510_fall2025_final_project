@@ -78,25 +78,31 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         print(f"--- Plotting statistics for {dataset_name1} and {dataset_name2}---")
         #dual axis line chart
         fig, ax1 = plt.subplots()
-        plt.title(f'{dataset_name1} and {dataset_name2} over Time')
-        plt.plot(df1['Date'], df1.iloc[:, 1], color = color1)
+        ax1.set_title(f'{dataset_name1} and {dataset_name2} over Time')
+        ax1.plot(df1['Date'], df1.iloc[:, 1], color = color1)
         ax1.set_xlabel('Date')
         ax1.set_ylabel(dataset_name1, color='Black')
         ax2 = ax1.twinx()
-        plt.plot(df2['Date'], df2.iloc[:, 1], color= color2)
+        ax2.plot(df2['Date'], df2.iloc[:, 1], color= color2)
         ax2.set_ylabel(dataset_name2, color='Black')
 
         #scatter
         fig, ax1 = plt.subplots()
-        plt.title(f'Scatter Plot of {dataset_name1} and {dataset_name2}')
-        plt.scatter(df1.iloc[:, 1], df2.iloc[:, 1], color = color1)
+        ax1.set_title(f'Scatter Plot of {dataset_name1} and {dataset_name2}')
+        ax1.scatter(df1.iloc[:, 1], df2.iloc[:, 1], color = color1)
         ax1.set_xlabel(dataset_name1, color='Black')
         ax1.set_ylabel(dataset_name2, color='Black')
         slope, intercept = np.polyfit(df1.iloc[:, 1], df2.iloc[:, 1], 1)  # linear regression
         reg_line = (slope * df1.iloc[:, 1]) + intercept
-        plt.plot(df1.iloc[:, 1], reg_line, color='red', linewidth=2, label=f'Regression line: y={slope:.2f}x+{intercept:.2f}')
+        ax1.plot(df1.iloc[:, 1], reg_line, color='red', linewidth=2, label=f'Regression line: y={slope:.2f}x+{intercept:.2f}')
 
         #heatmap
+        fig, ax1 = plt.subplots()
+        ax1.set_title(f'Heatmap of {dataset_name1} and {dataset_name2}')
+        temp_df_corr = df1.merge(df2, on = 'Date').corr()
+        heatmap = plt.imshow(temp_df_corr)
+        plt.colorbar(heatmap)
+
     else:
         print(f"--- Plotting statistics for {dataset_name1}, {dataset_name2}, and {dataset_name3}---")
     
