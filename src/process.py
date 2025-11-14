@@ -37,6 +37,7 @@ def process_stock_data(data, stock_name):
         data.columns = data.columns.get_level_values(0)
         data['Date'] = pd.to_datetime(data['Date'])
         data['Close'] = data['Close'].pct_change() * 100
+        data = data.dropna()
         return data
     except Exception as e:
         print(f"Error processing {stock_name} data: {e}")
