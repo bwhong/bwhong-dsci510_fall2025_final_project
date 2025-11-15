@@ -25,7 +25,6 @@ def plot_statistics(df, dataset_name, color, result_dir="plots", notebook_plot=F
     categorical_cols = df.select_dtypes(include=['object', 'category']).columns
     datetime_cols = df.select_dtypes(include=['datetime']).columns
 
-    print(datetime_cols)
     # Plot 1: Histogram (for a numerical column)
     if not numerical_cols.empty:
         col_to_plot = numerical_cols[0]
