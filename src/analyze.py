@@ -103,10 +103,28 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         if df1.columns[1] == df2.columns[1]:
             df1.columns = ['Date', dataset_name1]
             df2.columns = ['Date', dataset_name2]
-        temp_df_corr = df1.merge(df2, on = 'Date').corr()
-        print(temp_df_corr)
+        temp_df_corr = df1.merge(df2, on = 'Date').drop(columns = {'Date'}).corr()
         sns.heatmap(temp_df_corr, annot=True)
         plt.show()
     else:
-        print(f"--- Plotting statistics for {dataset_name1}, {dataset_name2}, and {dataset_name3}---")
-    
+        print(f"--- Plotting statistics for {dataset_name1} and {dataset_name2} and {dataset_name3}---")
+        #dual axis line chart
+        fig, ax1 = plt.subplots()
+        ax1.set_title(f'{dataset_name1}, {dataset_name2}, and {dataset_name3} over Time')
+        ax1.plot(df1['Date'], df1.iloc[:, 1], color = color1)
+        ax1.set_xlabel('Date')
+        ax1.set_ylabel(dataset_name1, color='Black')
+        ax1.plot(df2['Date'], df2.iloc[:, 1], color = color2)
+        ax2 = ax1.twinx()
+        ax2.plot(df3['Date'], df3.iloc[:, 1], color= color3)
+        ax2.set_ylabel(dataset_name3, color='Black')
+
+        #heatmap
+        fig, ax1 = plt.subplots()
+        ax1.set_title(f'Heatmap of {dataset_name1}, {dataset_name2}, and {dataset_name3}')
+        if df1.columns[1] == df2.columns[1]:
+            df1.columns = ['Date', dataset_name1]
+            df2.columns = ['Date', dataset_name2]
+        temp_df_corr = df1.merge(df2, on = 'Date').merge(df3, on = 'Date').drop(columns = {'Date'}).corr()
+        sns.heatmap(temp_df_corr, annot=True)
+        plt.show()
