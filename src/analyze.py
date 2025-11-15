@@ -59,7 +59,7 @@ def plot_statistics(df, dataset_name, color, result_dir="plots", notebook_plot=F
         else:
             plt.plot()
 
-def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_name2, df3 = None, color3 = None, dataset_name3 = None, result_dir="plots", notebook_plot=False):
+def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_name2, df3 = None, color3 = None, dataset_name3 = None, result_dir="plots", ai_boom = None, notebook_plot=False):
     """
     Generates and saves correlation plots for given DataFrames.
 
@@ -87,7 +87,12 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         ax2.plot(df2['Date'], df2.iloc[:, 1], color= color2)
         ax2.set_ylabel(dataset_name2, color='Black')
         if not notebook_plot:
-            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_dual_axis_line_chart.png')
+            if ai_boom == 'Post':
+                plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_dual_axis_line_chart.png')
+            elif ai_boom == 'Pre':
+                plt.savefig(f'{result_dir}/Pre_AI_Boom_{dataset_name1}_{dataset_name2}_dual_axis_line_chart.png')
+            else:
+                plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_dual_axis_line_chart.png')
             print(f"Saved Dual Axis Line Chart for {dataset_name1} and {dataset_name2}")
             plt.close()
         else:
@@ -102,7 +107,12 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         ax1.set_xlabel(dataset_name1, color='Black')
         ax1.set_ylabel(dataset_name2, color='Black')
         if not notebook_plot:
-            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_scatter_plot.png')
+            if ai_boom == 'Post':
+                plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_scatter_plot.png')
+            elif ai_boom == 'Pre':
+                plt.savefig(f'{result_dir}/Pre_AI_Boom_{dataset_name1}_{dataset_name2}_scatter_plot.png')
+            else:
+                plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_scatter_plot.png')
             print(f"Saved Scatter Plot for {dataset_name1} and {dataset_name2}")
             plt.close()
         else:
@@ -120,7 +130,12 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         plt.yticks(rotation=0)
         sns.heatmap(temp_df_corr, annot=True)
         if not notebook_plot:
-            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_heatmap.png')
+            if ai_boom == 'Post':
+                plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_heatmap.png')
+            elif ai_boom == 'Pre':
+                plt.savefig(f'{result_dir}/Pre_AI_Boom_{dataset_name1}_{dataset_name2}_heatmap.png')
+            else:
+                plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_heatmap.png')
             print(f"Saved Heatmap for {dataset_name1} and {dataset_name2}")
             plt.close()
         else:
@@ -138,7 +153,12 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         ax2.plot(df3['Date'], df3.iloc[:, 1], color= color3)
         ax2.set_ylabel(dataset_name3, color='Black')
         if not notebook_plot:
-            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png')
+            if ai_boom == 'Post':
+                plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png')
+            elif ai_boom == 'Pre':
+                plt.savefig(f'{result_dir}/Pre_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png')
+            else:
+                plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png')
             print(f"Saved Dual Axis Line Chart for {dataset_name1}, {dataset_name2}, and {dataset_name3}")
             plt.close()
         else:
@@ -154,7 +174,12 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         plt.xticks(rotation=0, fontsize=8) 
         plt.yticks(rotation=90, fontsize=8) 
         if not notebook_plot:
-            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png')
+            if ai_boom == 'Post':
+                plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png')
+            elif ai_boom == 'Pre':
+                plt.savefig(f'{result_dir}/Pre_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png')
+            else:
+                plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png')
             print(f"Saved Heatmap for {dataset_name1}, {dataset_name2}, and {dataset_name3}")
             plt.close()
         else:
