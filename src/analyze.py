@@ -86,16 +86,28 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         ax2 = ax1.twinx()
         ax2.plot(df2['Date'], df2.iloc[:, 1], color= color2)
         ax2.set_ylabel(dataset_name2, color='Black')
+        if not notebook_plot:
+            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_dual_axis_line_chart.png')
+            print(f"Saved Dual Axis Line Chart for {dataset_name1} and {dataset_name2}")
+            plt.close()
+        else:
+            plt.plot()
 
         #scatter
         fig, ax1 = plt.subplots()
         ax1.set_title(f'Scatter Plot of {dataset_name1} and {dataset_name2}')
-        ax1.scatter(df1.iloc[:, 1], df2.iloc[:, 1], color = color1)
+        temp_df = df1.merge(df2, on = 'Date')
+        temp_df.columns = ['Date', dataset_name1, dataset_name2]
+        sns.regplot(x=temp_df.columns[1], y=temp_df.columns[2], data=temp_df, scatter_kws={'color':color1}, ci=95, color = 'red')
         ax1.set_xlabel(dataset_name1, color='Black')
         ax1.set_ylabel(dataset_name2, color='Black')
-        slope, intercept = np.polyfit(df1.iloc[:, 1], df2.iloc[:, 1], 1)  # linear regression
-        reg_line = (slope * df1.iloc[:, 1]) + intercept
-        ax1.plot(df1.iloc[:, 1], reg_line, color='red', linewidth=2, label=f'Regression line: y={slope:.2f}x+{intercept:.2f}')
+        if not notebook_plot:
+            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_scatter_plot.png')
+            print(f"Saved Scatter Plot for {dataset_name1} and {dataset_name2}")
+            plt.close()
+        else:
+            plt.plot()
+
 
         #heatmap
         fig, ax1 = plt.subplots()
@@ -104,8 +116,15 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
             df1.columns = ['Date', dataset_name1]
             df2.columns = ['Date', dataset_name2]
         temp_df_corr = df1.merge(df2, on = 'Date').drop(columns = {'Date'}).corr()
+        plt.xticks(rotation=0) 
+        plt.yticks(rotation=0)
         sns.heatmap(temp_df_corr, annot=True)
-        plt.show()
+        if not notebook_plot:
+            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_heatmap.png')
+            print(f"Saved Heatmap for {dataset_name1} and {dataset_name2}")
+            plt.close()
+        else:
+            plt.plot()
     else:
         print(f"--- Plotting statistics for {dataset_name1} and {dataset_name2} and {dataset_name3}---")
         #dual axis line chart
@@ -118,7 +137,12 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         ax2 = ax1.twinx()
         ax2.plot(df3['Date'], df3.iloc[:, 1], color= color3)
         ax2.set_ylabel(dataset_name3, color='Black')
-
+        if not notebook_plot:
+            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png')
+            print(f"Saved Dual Axis Line Chart for {dataset_name1}, {dataset_name2}, and {dataset_name3}")
+            plt.close()
+        else:
+            plt.plot()
         #heatmap
         fig, ax1 = plt.subplots()
         ax1.set_title(f'Heatmap of {dataset_name1}, {dataset_name2}, and {dataset_name3}')
@@ -127,4 +151,11 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
             df2.columns = ['Date', dataset_name2]
         temp_df_corr = df1.merge(df2, on = 'Date').merge(df3, on = 'Date').drop(columns = {'Date'}).corr()
         sns.heatmap(temp_df_corr, annot=True)
-        plt.show()
+        plt.xticks(rotation=0, fontsize=8) 
+        plt.yticks(rotation=90, fontsize=8) 
+        if not notebook_plot:
+            plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png')
+            print(f"Saved Heatmap for {dataset_name1}, {dataset_name2}, and {dataset_name3}")
+            plt.close()
+        else:
+            plt.plot()
