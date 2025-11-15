@@ -37,11 +37,19 @@ if __name__ == "__main__":
     plot_correlation_analysis(nvidia_processed_data, spy_processed_data, NVIDIA_DATASET_COLOR, SPY_DATASET_COLOR, 'NVIDIA Log Close Price ($)', 'SPY Log Close Price($)', fred_processed_data, UNRATE_DATASET_COLOR, 'Unemployment Rate (%)', result_dir=RESULTS_DIR)
     print("\n" + "=" * 50 + "\n")
 
+    #plot Pre AI Boom Correlation Analysis Plots
+    fred_processed_data_pre_ai_boom = fred_processed_data[fred_processed_data['Date'] < AI_BOOM_START_DATE]
+    nvidia_processed_data_pre_ai_boom = nvidia_processed_data[nvidia_processed_data['Date'] < AI_BOOM_START_DATE]
+    spy_processed_data_pre_ai_boom = spy_processed_data[spy_processed_data['Date'] < AI_BOOM_START_DATE]
+    plot_correlation_analysis(nvidia_processed_data_pre_ai_boom, spy_processed_data_pre_ai_boom, NVIDIA_DATASET_COLOR, SPY_DATASET_COLOR, 'NVIDIA Log Close Price ($)', 'SPY Log Close Price($)', fred_processed_data_pre_ai_boom, UNRATE_DATASET_COLOR, 'Unemployment Rate (%)', result_dir= RESULTS_DIR, ai_boom= 'Pre')
+    
+    print("\n" + "=" * 50 + "\n")
+
     #plot Post AI Boom Correlation Analysis Plots
-    fred_processed_data_ai_boom = fred_processed_data[fred_processed_data['Date'] >= AI_BOOM_START_DATE]
-    nvidia_processed_data_ai_boom = nvidia_processed_data[nvidia_processed_data['Date'] >= AI_BOOM_START_DATE]
-    spy_processed_data_ai_boom = spy_processed_data[spy_processed_data['Date'] >= AI_BOOM_START_DATE]
-    plot_correlation_analysis(nvidia_processed_data_ai_boom, spy_processed_data_ai_boom, NVIDIA_DATASET_COLOR, SPY_DATASET_COLOR, 'NVIDIA Log Close Price ($)', 'SPY Log Close Price($)', fred_processed_data_ai_boom, UNRATE_DATASET_COLOR, 'Unemployment Rate (%)', result_dir= RESULTS_DIR, ai_boom= 'Post')
+    fred_processed_data_post_ai_boom = fred_processed_data[fred_processed_data['Date'] >= AI_BOOM_START_DATE]
+    nvidia_processed_data_post_ai_boom = nvidia_processed_data[nvidia_processed_data['Date'] >= AI_BOOM_START_DATE]
+    spy_processed_data_post_ai_boom = spy_processed_data[spy_processed_data['Date'] >= AI_BOOM_START_DATE]
+    plot_correlation_analysis(nvidia_processed_data_post_ai_boom, spy_processed_data_post_ai_boom, NVIDIA_DATASET_COLOR, SPY_DATASET_COLOR, 'NVIDIA Log Close Price ($)', 'SPY Log Close Price($)', fred_processed_data_post_ai_boom, UNRATE_DATASET_COLOR, 'Unemployment Rate (%)', result_dir= RESULTS_DIR, ai_boom= 'Post')
     
     print("\n" + "=" * 50 + "\n")
 
