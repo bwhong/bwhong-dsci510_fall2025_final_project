@@ -1,5 +1,6 @@
 import os
 import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
 
 
@@ -99,10 +100,13 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         #heatmap
         fig, ax1 = plt.subplots()
         ax1.set_title(f'Heatmap of {dataset_name1} and {dataset_name2}')
+        if df1.columns[1] == df2.columns[1]:
+            df1.columns = ['Date', dataset_name1]
+            df2.columns = ['Date', dataset_name2]
         temp_df_corr = df1.merge(df2, on = 'Date').corr()
-        heatmap = plt.imshow(temp_df_corr)
-        plt.colorbar(heatmap)
-
+        print(temp_df_corr)
+        sns.heatmap(temp_df_corr, annot=True)
+        plt.show()
     else:
         print(f"--- Plotting statistics for {dataset_name1}, {dataset_name2}, and {dataset_name3}---")
     
