@@ -144,13 +144,26 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         #dual axis line chart
         fig, ax1 = plt.subplots()
         ax1.set_title(f'{dataset_name1}, {dataset_name2}, and {dataset_name3} over Time')
-        ax1.plot(df1['Date'], df1.iloc[:, 1], color = color1)
+        sns.lineplot(data=df1, x="Date", y=df1.columns[1], ax=ax1, label=dataset_name1, color=color1, legend = False)
+        sns.lineplot(data=df2, x="Date", y=df2.columns[1], ax=ax1, label=dataset_name2, color=color2, legend = False)
         ax1.set_xlabel('Date')
         ax1.set_ylabel(dataset_name1, color='Black')
-        ax1.plot(df2['Date'], df2.iloc[:, 1], color = color2)
         ax2 = ax1.twinx()
-        ax2.plot(df3['Date'], df3.iloc[:, 1], color= color3)
+        sns.lineplot(data=df3, x="Date", y=df3.columns[1], ax=ax2, label=dataset_name3, color=color3, legend = False)
         ax2.set_ylabel(dataset_name3, color='Black')
+        handles1, labels1 = ax1.get_legend_handles_labels()
+        handles2, labels2 = ax2.get_legend_handles_labels()
+        ax1.legend(handles1 + handles2,
+           labels1 + labels2,
+           loc='upper left',
+           frameon=True, prop={'size': 7})
+        #ax1.plot(df1['Date'], df1.iloc[:, 1], color = color1, label = dataset_name1)
+        #ax1.set_xlabel('Date')
+        #ax1.set_ylabel(dataset_name1, color='Black')
+        #ax1.plot(df2['Date'], df2.iloc[:, 1], color = color2, label = dataset_name2)
+        #ax2 = ax1.twinx()
+        #ax2.plot(df3['Date'], df3.iloc[:, 1], color= color3, label = dataset_name3)
+        #ax2.set_ylabel(dataset_name3, color='Black')
         if not notebook_plot:
             if ai_boom == 'Post':
                 plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png', bbox_inches='tight')
