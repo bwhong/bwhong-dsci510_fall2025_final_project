@@ -153,11 +153,11 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         ax2.set_ylabel(dataset_name3, color='Black')
         if not notebook_plot:
             if ai_boom == 'Post':
-                plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png')
+                plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png', bbox_inches='tight')
             elif ai_boom == 'Pre':
-                plt.savefig(f'{result_dir}/Pre_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png')
+                plt.savefig(f'{result_dir}/Pre_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png', bbox_inches='tight')
             else:
-                plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png')
+                plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png', bbox_inches='tight')
             print(f"Saved Dual Axis Line Chart for {dataset_name1}, {dataset_name2}, and {dataset_name3}")
             plt.close()
         else:
@@ -174,11 +174,11 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         plt.yticks(rotation=90, fontsize=8) 
         if not notebook_plot:
             if ai_boom == 'Post':
-                plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png')
+                plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png', bbox_inches='tight')
             elif ai_boom == 'Pre':
-                plt.savefig(f'{result_dir}/Pre_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png')
+                plt.savefig(f'{result_dir}/Pre_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png', bbox_inches='tight')
             else:
-                plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png')
+                plt.savefig(f'{result_dir}/{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png', bbox_inches='tight')
             print(f"Saved Heatmap for {dataset_name1}, {dataset_name2}, and {dataset_name3}")
             plt.close()
         else:
