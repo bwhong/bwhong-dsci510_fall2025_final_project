@@ -15,6 +15,14 @@ print(fred_GDP_data.head())
 
 print()
 
+print('FRED GDP Data Error Test')
+try:
+    fred_GDP_data = get_fred_data('GDasdasdP', '2010-01-01', '2023-11-01', fred_api_key, freq= 'q')
+except:
+    print('Error Expected')
+
+print()
+
 print('NVIDIA Data Loading Test')
 nvidia_data = get_stock_data('NVDA', '2000-01-01', '2025-11-01', '1mo', True)
 print(nvidia_data.head())

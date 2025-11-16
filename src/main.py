@@ -1,4 +1,3 @@
-import os
 from config import fred_api_key, UNRATE_DATASET, SPY_DATASET, NVIDIA_DATASET, START_DATE, END_DATE, AI_BOOM_START_DATE, UNRATE_DATASET_COLOR, SPY_DATASET_COLOR, NVIDIA_DATASET_COLOR, RESULTS_DIR
 from load import get_fred_data, get_stock_data
 from analyze import plot_statistics, plot_correlation_analysis
