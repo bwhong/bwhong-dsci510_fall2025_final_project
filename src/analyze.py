@@ -157,13 +157,6 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
            labels1 + labels2,
            loc='upper left',
            frameon=True, prop={'size': 7})
-        #ax1.plot(df1['Date'], df1.iloc[:, 1], color = color1, label = dataset_name1)
-        #ax1.set_xlabel('Date')
-        #ax1.set_ylabel(dataset_name1, color='Black')
-        #ax1.plot(df2['Date'], df2.iloc[:, 1], color = color2, label = dataset_name2)
-        #ax2 = ax1.twinx()
-        #ax2.plot(df3['Date'], df3.iloc[:, 1], color= color3, label = dataset_name3)
-        #ax2.set_ylabel(dataset_name3, color='Black')
         if not notebook_plot:
             if ai_boom == 'Post':
                 plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png', bbox_inches='tight')
