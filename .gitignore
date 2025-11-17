@@ -2,3 +2,4 @@ src/__pycache__
 src/plots
 results
 .DS_Store
+.env
