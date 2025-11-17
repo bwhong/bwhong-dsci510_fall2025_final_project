@@ -39,7 +39,7 @@ def process_stock_data(data, stock_name):
     print(f"--- Processing {stock_name} data---")
     try:
         print(f"Processing {stock_name}...")
-        data = data.reset_index()[['Date', 'Close']]
+        data = data.reset_index()
         #remove multi-index and column index name
         data.columns = data.columns.get_level_values(0).rename(None)
         data['Date'] = pd.to_datetime(data['Date'])
