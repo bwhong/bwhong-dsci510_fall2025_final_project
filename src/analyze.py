@@ -79,12 +79,6 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         #dual axis line chart
         fig, ax1 = plt.subplots()
         ax1.set_title(f'{dataset_name1} and {dataset_name2} over Time')
-        #ax1.plot(df1['Date'], df1.iloc[:, 1], color = color1)
-        #ax1.set_xlabel('Date')
-        #ax1.set_ylabel(dataset_name1, color='Black')
-        #ax2 = ax1.twinx()
-        #ax2.plot(df2['Date'], df2.iloc[:, 1], color= color2)
-        #ax2.set_ylabel(dataset_name2, color='Black')
         sns.lineplot(data=df1, x="Date", y=df1.columns[1], ax=ax1, label=dataset_name1, color=color1, legend = False)
         ax1.set_xlabel('Date')
         ax1.set_ylabel(dataset_name1, color='Black')
