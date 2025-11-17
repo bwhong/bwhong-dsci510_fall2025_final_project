@@ -6,7 +6,7 @@ from process import process_fred_data, process_stock_data
 if __name__ == "__main__":
     # --- FRED Data ---
     fred_raw_data = get_fred_data(UNRATE_DATASET, START_DATE, END_DATE, fred_api_key)
-    fred_processed_data = process_fred_data(fred_raw_data, 'Unemployment Rate')
+    fred_processed_data = process_fred_data(fred_raw_data, 'Unemployment Rate', True)
     print("\n" + "=" * 50 + "\n")
 
     # --- NVIDIA Data ---
@@ -33,6 +33,9 @@ if __name__ == "__main__":
     plot_correlation_analysis(nvidia_processed_data, fred_processed_data, NVIDIA_DATASET_COLOR, UNRATE_DATASET_COLOR, 'NVIDIA Log Close Price', 'Unemployment Rate', result_dir=RESULTS_DIR)
     print("\n" + "=" * 50 + "\n")
     
+    plot_correlation_analysis(spy_processed_data, fred_processed_data, SPY_DATASET_COLOR, UNRATE_DATASET_COLOR, 'SPY Log Close Price', 'Unemployment Rate', result_dir=RESULTS_DIR)
+    print("\n" + "=" * 50 + "\n")
+
     plot_correlation_analysis(nvidia_processed_data, spy_processed_data, NVIDIA_DATASET_COLOR, SPY_DATASET_COLOR, 'NVIDIA Log Close Price', 'SPY Log Close Price', fred_processed_data, UNRATE_DATASET_COLOR, 'Unemployment Rate', result_dir=RESULTS_DIR)
     print("\n" + "=" * 50 + "\n")
 
