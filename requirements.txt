@@ -2,8 +2,7 @@ numpy
 pandas
 os
 dotenv
-matplotlib
-pathlib
+matplotlibs
 yfinance
 fredapi
 seaborn
