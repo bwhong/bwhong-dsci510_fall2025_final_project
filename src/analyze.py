@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-
 # --- PLOT STATISTICS ---
 def plot_statistics(df, dataset_name, color, result_dir="plots", notebook_plot=False):
     """
@@ -20,7 +19,7 @@ def plot_statistics(df, dataset_name, color, result_dir="plots", notebook_plot=F
     # Ensure a directory for plots exists
     os.makedirs(result_dir, exist_ok=True)
 
-    # Identify numerical and categorical columns for plotting
+    # Identify numerical, categorical, and date columns for plotting
     numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns
     categorical_cols = df.select_dtypes(include=['object', 'category']).columns
     datetime_cols = df.select_dtypes(include=['datetime']).columns
@@ -72,8 +71,10 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
     :param color3: optional color for the third pandas dataframe
     :param dataset_name2: An optional name for titling plots for the third pandas dataframe
     :param result_dir: where to place plots
+    :param ai_boom: Post or Pre to determine if data visualization is for Pre AI Boom or Post AI Boom
     :param notebook_plot: whether to send plot to results directory or just display it in notebook
     """
+    #for two dataset correlation analysis
     if df3 is None:
         print(f"--- Plotting statistics for {dataset_name1} and {dataset_name2}---")
         #dual axis line chart
@@ -82,15 +83,18 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         sns.lineplot(data=df1, x="Date", y=df1.columns[1], ax=ax1, label=dataset_name1, color=color1, legend = False)
         ax1.set_xlabel('Date')
         ax1.set_ylabel(dataset_name1, color='Black')
+        #creates second axis
         ax2 = ax1.twinx()
         sns.lineplot(data=df2, x="Date", y=df2.columns[1], ax=ax1, label=dataset_name2, color=color2, legend = False)
         ax2.set_ylabel(dataset_name3, color='Black')
+        #combine legends 
         handles1, labels1 = ax1.get_legend_handles_labels()
         handles2, labels2 = ax2.get_legend_handles_labels()
         ax1.legend(handles1 + handles2,
            labels1 + labels2,
            loc='upper left',
-           frameon=True, prop={'size': 7})        
+           frameon=True, prop={'size': 7})
+        #saving files under different name        
         if not notebook_plot:
             if ai_boom == 'Post':
                 plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_dual_axis_line_chart.png')
@@ -103,14 +107,16 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         else:
             plt.plot()
 
-        #scatter
+        #scatter plot
         fig, ax1 = plt.subplots()
         ax1.set_title(f'Scatter Plot of {dataset_name1} and {dataset_name2}')
         temp_df = df1.merge(df2, on = 'Date')
         temp_df.columns = ['Date', dataset_name1, dataset_name2]
+        #creates a scatter plot with a regression line
         sns.regplot(x=temp_df.columns[1], y=temp_df.columns[2], data=temp_df, scatter_kws={'color':color1}, ci=95, color = 'red')
         ax1.set_xlabel(dataset_name1, color='Black')
         ax1.set_ylabel(dataset_name2, color='Black')
+        #saving files under different names
         if not notebook_plot:
             if ai_boom == 'Post':
                 plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_scatter_plot.png')
@@ -130,10 +136,12 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         if df1.columns[1] == df2.columns[1]:
             df1.columns = ['Date', dataset_name1]
             df2.columns = ['Date', dataset_name2]
+        #merge columns to get correlation
         temp_df_corr = df1.merge(df2, on = 'Date').drop(columns = {'Date'}).corr()
         plt.xticks(rotation=0) 
         plt.yticks(rotation=0)
         sns.heatmap(temp_df_corr, annot=True)
+        #saving files under different names
         if not notebook_plot:
             if ai_boom == 'Post':
                 plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_heatmap.png')
@@ -146,6 +154,7 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         else:
             plt.plot()
     else:
+        #for 3 dataset correlation analysis
         print(f"--- Plotting statistics for {dataset_name1} and {dataset_name2} and {dataset_name3}---")
         #dual axis line chart
         fig, ax1 = plt.subplots()
@@ -157,12 +166,14 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         ax2 = ax1.twinx()
         sns.lineplot(data=df3, x="Date", y=df3.columns[1], ax=ax2, label=dataset_name3, color=color3, legend = False)
         ax2.set_ylabel(dataset_name3, color='Black')
+        #combines legends
         handles1, labels1 = ax1.get_legend_handles_labels()
         handles2, labels2 = ax2.get_legend_handles_labels()
         ax1.legend(handles1 + handles2,
            labels1 + labels2,
            loc='upper left',
            frameon=True, prop={'size': 7})
+        #saving files under different names
         if not notebook_plot:
             if ai_boom == 'Post':
                 plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_dual_axis_line_chart.png', bbox_inches='tight')
@@ -177,13 +188,21 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         #heatmap
         fig, ax1 = plt.subplots()
         ax1.set_title(f'Heatmap of {dataset_name1}, {dataset_name2}, and {dataset_name3}')
+        #change column names to dataset name if they are identical
         if df1.columns[1] == df2.columns[1]:
             df1.columns = ['Date', dataset_name1]
             df2.columns = ['Date', dataset_name2]
+        elif df1.columns[1] == df3.columns[1]:
+            df1.columns = ['Date', dataset_name1]
+            df3.columns = ['Date', dataset_name3] 
+        elif df2.columns[1] == df3.columns[1]:
+            df2.columns = ['Date', dataset_name2]
+            df3.columns = ['Date', dataset_name3]         
         temp_df_corr = df1.merge(df2, on = 'Date').merge(df3, on = 'Date').drop(columns = {'Date'}).corr()
         sns.heatmap(temp_df_corr, annot=True)
         plt.xticks(rotation=0, fontsize=8) 
         plt.yticks(rotation=90, fontsize=8) 
+        #saving files under different names
         if not notebook_plot:
             if ai_boom == 'Post':
                 plt.savefig(f'{result_dir}/Post_AI_Boom_{dataset_name1}_{dataset_name2}_{dataset_name3}_heatmap.png', bbox_inches='tight')
