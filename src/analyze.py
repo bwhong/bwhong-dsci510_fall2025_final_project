@@ -29,7 +29,7 @@ def plot_statistics(df, dataset_name, color, result_dir="plots", notebook_plot=F
         col_to_plot = numerical_cols[0]
         plt.figure(figsize=(10, 6))
         df[col_to_plot].hist(bins=30, color = color, edgecolor='black')
-        plt.title(f'Histogram of {col_to_plot} - {dataset_name}')
+        plt.title(f'Histogram of {dataset_name}')
         plt.xlabel(col_to_plot)
         plt.ylabel('Frequency')
         plt.grid(axis='y')
@@ -46,7 +46,7 @@ def plot_statistics(df, dataset_name, color, result_dir="plots", notebook_plot=F
         col2 = numerical_cols[0]
         plt.figure(figsize=(10, 6))
         plt.plot(df[col1], df[col2], color = color, alpha=0.5)
-        plt.title(f'{col2} Over Time')
+        plt.title(f'{dataset_name} Over Time')
         plt.xlabel(col1)
         plt.ylabel(col2)
         plt.grid(True)
