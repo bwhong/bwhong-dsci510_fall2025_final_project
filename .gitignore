@@ -1,3 +1,4 @@
+#list of files to not track and/or push to github
 src/__pycache__
 src/plots
 results

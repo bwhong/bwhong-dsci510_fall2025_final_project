@@ -18,7 +18,7 @@ def get_fred_data(dataset, observation_start_date, observation_end_date, api_key
     """
     print(f"--- Extracting data from FRED: {dataset} ---")
     try:
-        print(f"Extracting {dataset}...")
+        print(f"Extracting {dataset}...") 
         fred = Fred(api_key = api_key)
         data = fred.get_series(
                 series_id= dataset,           
@@ -31,7 +31,7 @@ def get_fred_data(dataset, observation_start_date, observation_end_date, api_key
         print(f"Error extracting data from FRED: {e}")
         return None
     
-# --- 2. Exract Data from yfinance ---
+# --- 2. Exract Data from Yahoo Finance ---
 
 def get_stock_data(dataset, observation_start_date, observation_end_date, interval, auto_adjust = True):
     """
