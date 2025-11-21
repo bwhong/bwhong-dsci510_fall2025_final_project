@@ -44,10 +44,11 @@ def plot_statistics(df, dataset_name, color, result_dir="plots", notebook_plot=F
     if not datetime_cols.empty:
         col1 = datetime_cols[0]
         col2 = numerical_cols[0]
-        df["Moving_Average"] = df[col2].rolling(window=6).mean()
+        temp_df = df.copy()
+        temp_df ["Moving_Average"] = temp_df [col2].rolling(window=6).mean()
         plt.figure(figsize=(10, 6))
         plt.plot(df[col1], df[col2], color = color, label = {dataset_name}, alpha=0.5)
-        plt.plot(df["Date"], df["Moving_Average"], label="12-Month Moving Average", linewidth=2)
+        plt.plot(temp_df ["Date"], temp_df ["Moving_Average"], label="6-Month Moving Average", linewidth=2)
         plt.title(f'{dataset_name} Over Time')
         plt.xlabel(col1)
         plt.ylabel(col2)

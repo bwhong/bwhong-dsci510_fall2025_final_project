@@ -28,7 +28,7 @@ def process_fred_data(data, primary_column_name, covid = False):
         print(f"Error processing {primary_column_name} data: {e}")
         return None
 
-def process_stock_data(data, stock_name):
+def process_stock_data(data, stock_name, log = True):
     """
     Process stock data. Select date and close columns. Choose first level from multi-index.
     Rename column names to a clean name. Change date column to datetime data type. Convert 
@@ -47,10 +47,13 @@ def process_stock_data(data, stock_name):
         data.columns = data.columns.get_level_values(0).rename(None)
         #convert to datetime data type
         data['Date'] = pd.to_datetime(data['Date'])
-        #log transform close price
-        data['Log Close Price'] = np.log(data['Close'])
-        #select columns
-        data = data[['Date', 'Log Close Price']]
+        if log:
+            #log transform close price
+            data['Log Close Price'] = np.log(data['Close'])
+            #select columns
+            data = data[['Date', 'Log Close Price']]
+        else:
+            data = data[['Date', 'Close']]
         return data
     except Exception as e:
         print(f"Error processing {stock_name} data: {e}")
