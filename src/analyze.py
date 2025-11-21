@@ -44,12 +44,15 @@ def plot_statistics(df, dataset_name, color, result_dir="plots", notebook_plot=F
     if not datetime_cols.empty:
         col1 = datetime_cols[0]
         col2 = numerical_cols[0]
+        df["Moving_Average"] = df[col2].rolling(window=6).mean()
         plt.figure(figsize=(10, 6))
-        plt.plot(df[col1], df[col2], color = color, alpha=0.5)
+        plt.plot(df[col1], df[col2], color = color, label = {dataset_name}, alpha=0.5)
+        plt.plot(df["Date"], df["Moving_Average"], label="12-Month Moving Average", linewidth=2)
         plt.title(f'{dataset_name} Over Time')
         plt.xlabel(col1)
         plt.ylabel(col2)
         plt.grid(True)
+        plt.legend()
         if not notebook_plot:
             plt.savefig(f'{result_dir}/{dataset_name}_lineplot.png')
             print(f"Saved line plot for {col1} vs {col2}")
