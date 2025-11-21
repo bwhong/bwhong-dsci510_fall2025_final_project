@@ -89,8 +89,8 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         ax1.set_ylabel(dataset_name1, color='Black')
         #creates second axis
         ax2 = ax1.twinx()
-        sns.lineplot(data=df2, x="Date", y=df2.columns[1], ax=ax1, label=dataset_name2, color=color2, legend = False)
-        ax2.set_ylabel(dataset_name3, color='Black')
+        sns.lineplot(data=df2, x="Date", y=df2.columns[1], ax=ax2, label=dataset_name2, color=color2, legend = False)
+        ax2.set_ylabel(dataset_name2, color='Black')
         #combine legends 
         handles1, labels1 = ax1.get_legend_handles_labels()
         handles2, labels2 = ax2.get_legend_handles_labels()
