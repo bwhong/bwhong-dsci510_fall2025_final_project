@@ -18,7 +18,7 @@ def process_fred_data(data, primary_column_name, covid = False):
         #convert to datetime
         data['Date'] = pd.to_datetime(data['Date'])
         #standaridze covid data
-        if covid:
+        if not covid:
             #covid start and end dates declared by World Health Organization(WHO)
             covid_dates = (data['Date'] >= '2020-03-01') & (data['Date'] <= '2023-05-01')
             data.loc[covid_dates, primary_column_name] = np.nan
