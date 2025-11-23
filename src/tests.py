@@ -24,7 +24,7 @@ except:
 print()
 
 print('NVIDIA Data Loading Test')
-nvidia_data = get_stock_data('NVDA', '2000-01-01', '2025-11-01', '1mo', True)
+nvidia_data = get_stock_data('NVDA', '2000-01-01', '2025-11-01', '1mo', False)
 print(nvidia_data.head())
 
 print()
@@ -35,28 +35,33 @@ print(tesla_data.head())
 
 print()
 
-print('SPY Data Loading Test')
-spy_data = get_stock_data('SPY', '1990-01-01', '2025-11-01', '1mo', True)
-print(spy_data.head())
+print('TSLA Log Data Processing Test')
+tesla_log_data = process_stock_data(tesla_data, 'TSLA', True)
+print(tesla_data.head())
 
 print()
 
 print('Fred Processing Data Test')
-fred_unrate_processed_data = process_fred_data(fred_unrate_data, 'Unemployment Rate', True)
-print(fred_unrate_data.head())
+fred_unrate_processed_data_covid = process_fred_data(fred_unrate_data, 'Unemployment Rate', True)
+print(fred_unrate_processed_data_covid.head())
 
 print()
 
-print('SPY Processing Test')
-spy_processed_data = process_stock_data(spy_data, 'SPY')
-print(spy_processed_data)
+print('Fred Processing Data Test')
+fred_unrate_processed_data = process_fred_data(fred_unrate_data, 'Unemployment Rate', False)
+print(fred_unrate_processed_data.head())
 
 print()
 
 print('Plot Statistic test')
-plot_statistics(spy_processed_data, 'SPY',  color = 'blue')
+plot_statistics(fred_unrate_processed_data_covid, 'Unemployment Rate',  color = 'blue')
+
+print()
+
+print('Plot Statistic test')
+plot_statistics(tesla_log_data, 'TSLA',  color = 'blue')
 
 print()
 
 print('Plot Correlation Analysis')
-plot_correlation_analysis(spy_processed_data, fred_unrate_processed_data, 'blue', 'gray', 'SPY Log Close Price', 'Unemployment Rate')
+plot_correlation_analysis(tesla_log_data, fred_unrate_processed_data, 'blue', 'gray', 'Tesla Log Close Price', 'Unemployment Rate')
