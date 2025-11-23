@@ -7,6 +7,7 @@ def process_fred_data(data, primary_column_name, covid = False):
 
     :param dataset: Dataset to process
     :param primary_column_name: Primary Column Name to replace Value
+    :param covid: True if COVID data should be left as a raw value and False if COVID data should be smoothed
     :return: pandas DataFrame or None
     """
     print(f"--- Processing {primary_column_name} Dataset")
@@ -17,7 +18,7 @@ def process_fred_data(data, primary_column_name, covid = False):
         data.columns = ['Date', primary_column_name]
         #convert to datetime
         data['Date'] = pd.to_datetime(data['Date'])
-        #standaridze covid data
+        #normalize covid data
         if not covid:
             #covid start and end dates declared by World Health Organization(WHO)
             covid_dates = (data['Date'] >= '2020-03-01') & (data['Date'] <= '2023-05-01')
@@ -36,6 +37,7 @@ def process_stock_data(data, stock_name, log = True):
 
     :param dataset: Dataset to extract
     :param stock_name: Stock Name
+    :param log: True for log transformation and False for raw values
     :return: pandas DataFrame or None
     """
     print(f"--- Processing {stock_name} data---")
