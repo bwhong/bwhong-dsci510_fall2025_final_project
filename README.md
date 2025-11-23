@@ -1,5 +1,5 @@
 # Macro Meets Microchips
-Over the past decade, AI has become one of the hottest sectors in the world. Companies are investing large amounts into AI infrastructure, which has created a large demand for NVIDIA products. As companies integrate more AI into their infrastructure, we expect them to replace certain jobs. Our hypothesis is that there may be a relationship between the demand for NVIDIA Stock Price and US Unemployment. The S&P 500 will be used as a benchmark to measure the overall economy’s health and help reduce noise. 
+Over the past decade, AI has become one of the hottest sectors in the world. Companies are investing large amounts into AI infrastructure, which has created a large demand for NVIDIA products. As companies integrate more AI into their infrastructure, we expect them to replace certain jobs. Our hypothesis is that there may be a relationship between the demand for NVIDIA Stock and US Unemployment Rates. The S&P 500 will be used as a benchmark to measure the overall economy’s health and help reduce noise. 
 
 # Data sources
 | Data Source | Name/Short Description | Source/URL | Type | List of Fields | Format | Python Access? | Estimated Data Size |
