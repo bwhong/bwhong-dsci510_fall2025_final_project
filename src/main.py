@@ -6,8 +6,8 @@ from process import process_fred_data, process_stock_data
 if __name__ == "__main__":
     # --- FRED Data ---
     fred_raw_data = get_fred_data(UNRATE_DATASET, START_DATE, END_DATE, fred_api_key)
-    fred_processed_data = process_fred_data(fred_raw_data, 'Unemployment Rate', False)
     fred_processed_data_covid = process_fred_data(fred_raw_data, 'Unemployment Rate', covid = True)
+    fred_processed_data = process_fred_data(fred_raw_data, 'Unemployment Rate', False)
     print("\n" + "=" * 50 + "\n")
 
     # --- NVIDIA Data ---
