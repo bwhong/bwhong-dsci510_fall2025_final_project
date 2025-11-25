@@ -12,8 +12,8 @@ if __name__ == "__main__":
 
     # --- NVIDIA Data ---
     nvidia_raw_data = get_stock_data(NVIDIA_DATASET,  START_DATE, END_DATE, '1mo', True)
-    nvidia_processed_data  = process_stock_data(nvidia_raw_data, 'SPY', False)
-    nvidia_processed_log_data  = process_stock_data(nvidia_raw_data, 'SPY', True)
+    nvidia_processed_data  = process_stock_data(nvidia_raw_data, 'NVIDIA', False)
+    nvidia_processed_log_data  = process_stock_data(nvidia_raw_data, 'NVIDIA', True)
     print("\n" + "=" * 50 + "\n")
 
     # --- SPY Data ---
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     plot_correlation_analysis(spy_processed_log_data, fred_processed_data, SPY_DATASET_COLOR, UNRATE_DATASET_COLOR, 'SPY Log Close Price', 'Unemployment Rate', result_dir=RESULTS_DIR)
     print("\n" + "=" * 50 + "\n")
 
-    plot_correlation_analysis(nvidia_processed_log_data, spy_processed_data, NVIDIA_DATASET_COLOR, SPY_DATASET_COLOR, 'NVIDIA Log Close Price', 'SPY Log Close Price', fred_processed_data, UNRATE_DATASET_COLOR, 'Unemployment Rate', result_dir=RESULTS_DIR)
+    plot_correlation_analysis(nvidia_processed_log_data, spy_processed_log_data, NVIDIA_DATASET_COLOR, SPY_DATASET_COLOR, 'NVIDIA Log Close Price', 'SPY Log Close Price', fred_processed_data, UNRATE_DATASET_COLOR, 'Unemployment Rate', result_dir=RESULTS_DIR)
     print("\n" + "=" * 50 + "\n")
 
     #plot Pre AI Boom Correlation Analysis Plots
