@@ -1,6 +1,12 @@
-#list of files to not track and/or push to github
+# Byte-compiled / cache files
 src/__pycache__
-src/plots
-results
-.DS_Store
+
+# Environments
 .env
+
+# macOS Hidden File System
+.DS_Store
+
+# Project File Location Folders
+src/plots
+results/
