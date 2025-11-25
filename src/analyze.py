@@ -167,7 +167,7 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         sns.lineplot(data=df1, x="Date", y=df1.columns[1], ax=ax1, label=dataset_name1, color=color1, legend = False)
         sns.lineplot(data=df2, x="Date", y=df2.columns[1], ax=ax1, label=dataset_name2, color=color2, legend = False)
         ax1.set_xlabel('Date')
-        ax1.set_ylabel(dataset_name1, color='Black')
+        ax1.set_ylabel(df1.columns[1], color='Black')
         ax2 = ax1.twinx()
         sns.lineplot(data=df3, x="Date", y=df3.columns[1], ax=ax2, label=dataset_name3, color=color3, legend = False)
         ax2.set_ylabel(dataset_name3, color='Black')
@@ -193,17 +193,20 @@ def plot_correlation_analysis(df1, df2, color1, color2, dataset_name1, dataset_n
         #heatmap
         fig, ax1 = plt.subplots()
         ax1.set_title(f'Heatmap of {dataset_name1}, {dataset_name2}, and {dataset_name3}')
+        temp_df1 = df1.copy()
+        temp_df2 = df2.copy()
+        temp_df3 = df3.copy()
         #change column names to dataset name if they are identical
-        if df1.columns[1] == df2.columns[1]:
-            df1.columns = ['Date', dataset_name1]
-            df2.columns = ['Date', dataset_name2]
-        elif df1.columns[1] == df3.columns[1]:
-            df1.columns = ['Date', dataset_name1]
-            df3.columns = ['Date', dataset_name3] 
-        elif df2.columns[1] == df3.columns[1]:
-            df2.columns = ['Date', dataset_name2]
-            df3.columns = ['Date', dataset_name3]         
-        temp_df_corr = df1.merge(df2, on = 'Date').merge(df3, on = 'Date').drop(columns = {'Date'}).corr()
+        if temp_df1.columns[1] == temp_df2.columns[1]:
+            temp_df1.columns = ['Date', dataset_name1]
+            temp_df2.columns = ['Date', dataset_name2]
+        elif temp_df1.columns[1] == temp_df3.columns[1]:
+            temp_df1.columns = ['Date', dataset_name1]
+            temp_df3.columns = ['Date', dataset_name3] 
+        elif temp_df2.columns[1] == temp_df3.columns[1]:
+            temp_df2.columns = ['Date', dataset_name2]
+            temp_df3.columns = ['Date', dataset_name3]         
+        temp_df_corr = temp_df1.merge(temp_df2, on = 'Date').merge(temp_df3, on = 'Date').drop(columns = {'Date'}).corr()
         sns.heatmap(temp_df_corr, annot=True)
         plt.xticks(rotation=0, fontsize=8) 
         plt.yticks(rotation=90, fontsize=8) 
