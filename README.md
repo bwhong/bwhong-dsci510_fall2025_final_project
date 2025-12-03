@@ -2,11 +2,11 @@
 Over the past decade, AI has become one of the hottest sectors in the world. Companies are investing large amounts into AI infrastructure, which has created a large demand for NVIDIA products. As companies integrate more AI into their infrastructure, we expect them to replace certain jobs. My hypothesis is that there may be a relationship between the demand for NVIDIA Stock and US Unemployment Rates. The S&P 500 will be used as a benchmark to measure the overall economy’s health and help reduce noise. 
 
 # Data sources
-| Data Source | Name/Short Description | Source/URL | Type | List of Fields | Format | Python Access? | Estimated Data Size |
+| Data Source | Name/Short Description | Source/URL | Type | List of Fields | Format | Estimated Data Size |
 |--------------|------------------------|-------------|------|----------------|---------|----------------|---------------------|
-| 1 | NVIDIA Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | Yes | 308 |
-| 2 | SPY Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | Yes | 308 |
-|3 | US Unemployment Rate | API Call | API Call | Date, Unrate | API Call to CSV | Yes | 308 |
+| 1 | NVIDIA Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | 308 |
+| 2 | SPY Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | 308 |
+|3 | US Unemployment Rate | API Call | API Call | Date, Unrate | API Call to CSV | 308 |
 
 # Analysis
 I extracted the data using my get_fred_data() and get_stock_data() functions in my load.py. I made sure to make them flexible to allow any user to download any dataset from either source to run a similar/identical analysis. Once the data was extracted via API, I processed both datasets.
