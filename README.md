@@ -3,7 +3,7 @@ Over the past decade, AI has become one of the hottest sectors in the world. Com
 
 # Data sources
 | Data Source | Name/Short Description | Source/URL | Type | List of Fields | Format | Estimated Data Size |
-|--------------|------------------------|-------------|------|----------------|---------|----------------|---------------------|
+|--------------|------------------------|-------------|------|----------------|---------|---------------------|
 | 1 | NVIDIA Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | 308 |
 | 2 | SPY Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | 308 |
 |3 | US Unemployment Rate | API Call | API Call | Date, Unrate | API Call to CSV | 308 |
