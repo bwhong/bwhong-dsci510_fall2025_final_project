@@ -36,6 +36,6 @@ Create free FRED account and obtain API Key. Create API_FRED_KEY and set the API
 
 From `src/` directory run:
 
-`python main`
+`python main.py`
 
 Results will appear in `results/` folder.
