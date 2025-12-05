@@ -55,7 +55,7 @@ if __name__ == "__main__":
     fred_processed_data_pre_ai_boom = fred_processed_data[fred_processed_data['Date'] < AI_BOOM_START_DATE]
     nvidia_processed_log_data_pre_ai_boom = nvidia_processed_log_data[nvidia_processed_log_data['Date'] < AI_BOOM_START_DATE]
     spy_processed_log_data_pre_ai_boom = spy_processed_log_data[spy_processed_log_data['Date'] < AI_BOOM_START_DATE]
-    plot_correlation_analysis(nvidia_processed_log_data_pre_ai_boom, fred_processed_data_pre_ai_boom, NVIDIA_DATASET_COLOR, UNRATE_DATASET_COLOR, NVIDIA_LOG_PLOT_BASE_TITLE, UNRATE_PLOT_BASE_TITLE, ai_boom= PRE_AI_BOOM)
+    plot_correlation_analysis(nvidia_processed_log_data_pre_ai_boom, fred_processed_data_pre_ai_boom, NVIDIA_DATASET_COLOR, UNRATE_DATASET_COLOR, NVIDIA_LOG_PLOT_BASE_TITLE, UNRATE_PLOT_BASE_TITLE, result_dir= RESULTS_DIR, ai_boom= PRE_AI_BOOM)
     plot_correlation_analysis(nvidia_processed_log_data_pre_ai_boom, spy_processed_log_data_pre_ai_boom, NVIDIA_DATASET_COLOR, SPY_DATASET_COLOR, NVIDIA_LOG_PLOT_BASE_TITLE, SPY_LOG_PLOT_BASE_TITLE, fred_processed_data_pre_ai_boom, UNRATE_DATASET_COLOR, UNRATE_PLOT_BASE_TITLE, result_dir= RESULTS_DIR, ai_boom= PRE_AI_BOOM)
     
     print("\n" + "=" * 50 + "\n")
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     fred_processed_data_post_ai_boom = fred_processed_data[fred_processed_data['Date'] >= AI_BOOM_START_DATE]
     nvidia_processed_log_data_post_ai_boom = nvidia_processed_log_data[nvidia_processed_log_data['Date'] >= AI_BOOM_START_DATE]
     spy_processed_log_data_post_ai_boom = spy_processed_log_data[spy_processed_log_data['Date'] >= AI_BOOM_START_DATE]
-    plot_correlation_analysis(nvidia_processed_log_data_post_ai_boom, fred_processed_data_post_ai_boom, NVIDIA_DATASET_COLOR, UNRATE_DATASET_COLOR, NVIDIA_LOG_PLOT_BASE_TITLE, UNRATE_PLOT_BASE_TITLE, ai_boom= POST_AI_BOOM)
+    plot_correlation_analysis(nvidia_processed_log_data_post_ai_boom, fred_processed_data_post_ai_boom, NVIDIA_DATASET_COLOR, UNRATE_DATASET_COLOR, NVIDIA_LOG_PLOT_BASE_TITLE, UNRATE_PLOT_BASE_TITLE, result_dir= RESULTS_DIR, ai_boom= POST_AI_BOOM)
     plot_correlation_analysis(nvidia_processed_log_data_post_ai_boom, spy_processed_log_data_post_ai_boom, NVIDIA_DATASET_COLOR, SPY_DATASET_COLOR, NVIDIA_LOG_PLOT_BASE_TITLE, SPY_LOG_PLOT_BASE_TITLE, fred_processed_data_post_ai_boom, UNRATE_DATASET_COLOR, UNRATE_PLOT_BASE_TITLE, result_dir= RESULTS_DIR, ai_boom= POST_AI_BOOM)
 
     print("\n" + "=" * 50 + "\n")
