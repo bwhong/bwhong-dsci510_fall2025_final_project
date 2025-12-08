@@ -4,9 +4,9 @@ Over the past decade, AI has become one of the hottest sectors in the world. Com
 # Data sources
 | Data Source | Name/Short Description | Source/URL | Type | List of Fields | Format | Estimated Data Size |
 |--------------|------------------------|-------------|------|----------------|---------|---------------------|
-| 1 | NVIDIA Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | 308 |
-| 2 | SPY Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | 308 |
-|3 | US Unemployment Rate | API Call | API Call | Date, Unrate | API Call to CSV | 308 |
+| 1 | Monthly NVIDIA Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | 308 |
+| 2 | Monthly SPY Historical Stock Prices| API Call | API Call | Date, Open, High, Low, Close | API Call to CSV | 308 |
+|3 | Monthly US Unemployment Rate | API Call | API Call | Date, Unrate | API Call to CSV | 308 |
 
 # Analysis
 I extracted the data using my get_fred_data() and get_stock_data() functions in my load.py. I made sure to make them flexible to allow any user to download any dataset from either source to run a similar/identical analysis. Once the data was extracted via API, I processed both datasets.
